@@ -23,9 +23,10 @@ if ! python -c "import PyInstaller" 2>/dev/null; then
     exit 1
 fi
 
-# Clean previous builds
+# Clean previous builds (but keep packaging/verax.spec)
 echo "Cleaning previous builds..."
-rm -rf build dist/windows *.spec *.log
+rm -rf build dist/windows
+rm -f *.spec *.log 2>/dev/null || true
 
 # Build
 echo "Running PyInstaller..."
