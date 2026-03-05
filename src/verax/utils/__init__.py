@@ -9,6 +9,7 @@ from verax.utils.file_utils import (
     ensure_dir,
 )
 from verax.utils.secrets import get_api_key, set_api_key, delete_api_key
+from verax.utils.config_manager import load_config, save_config, get_config_path
 
 __all__ = [
     "get_logger",
@@ -23,4 +24,7 @@ __all__ = [
     "get_api_key",
     "set_api_key",
     "delete_api_key",
+    "load_config",
+    "save_config",
+    "get_config_path",
 ]

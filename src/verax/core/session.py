@@ -1,9 +1,10 @@
 """Session management for application state."""
 
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Dict, List, Tuple
 
 from verax.models.template_schema import TemplateSchema
+from verax.models.structured_cv import StructuredCV
 from verax.models.config import AppConfig
 from verax.utils import get_logger
 
@@ -23,6 +24,9 @@ class Session:
         self.current_template_path: Optional[Path] = None
         self.current_template_schema: Optional[TemplateSchema] = None
         self.last_cv_dir: Optional[Path] = None
+        self.current_cv: Optional[StructuredCV] = None
+        # Store batch processing results: {cv_filename: (cv_path, structured_cv, error)}
+        self.batch_results: Dict[str, Tuple[Path, Optional[StructuredCV], Optional[Exception]]] = {}
         logger.info("Session initialized")
 
     def set_template(self, template_path: Path, schema: TemplateSchema) -> None:
@@ -60,3 +64,42 @@ class Session:
             Path or None
         """
         return self.last_cv_dir
+
+    def set_current_cv(self, cv: StructuredCV) -> None:
+        """Set current structured CV.
+
+        Args:
+            cv: StructuredCV instance
+        """
+        self.current_cv = cv
+        logger.debug(f"Current CV set: {len(cv.sections)} sections")
+
+    def get_current_cv(self) -> Optional[StructuredCV]:
+        """Get current structured CV.
+
+        Returns:
+            StructuredCV or None if not set
+        """
+        return self.current_cv
+
+    def set_batch_results(
+        self,
+        results: List[Tuple[Path, Optional[StructuredCV], Optional[Exception]]],
+    ) -> None:
+        """Store batch processing results.
+
+        Args:
+            results: List of (cv_path, structured_cv, error) tuples
+        """
+        self.batch_results.clear()
+        for cv_path, structured_cv, error in results:
+            self.batch_results[cv_path.name] = (cv_path, structured_cv, error)
+        logger.debug(f"Batch results stored: {len(self.batch_results)} CVs")
+
+    def get_batch_results(self) -> Dict[str, Tuple[Path, Optional[StructuredCV], Optional[Exception]]]:
+        """Get batch processing results.
+
+        Returns:
+            Dictionary of {cv_filename: (cv_path, structured_cv, error)}
+        """
+        return self.batch_results
