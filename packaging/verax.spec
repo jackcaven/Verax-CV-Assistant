@@ -11,10 +11,17 @@ import sys
 
 block_cipher = None
 
-# Compute absolute path to main.py (spec file is in packaging/ dir)
-spec_dir = os.path.dirname(os.path.abspath(__file__))
-root_dir = os.path.dirname(spec_dir)
+# Determine root directory: spec is in packaging/, so go up one level
+# PyInstaller is invoked from project root, so cwd is the root
+root_dir = os.getcwd()
+if not os.path.exists(os.path.join(root_dir, 'src', 'verax', 'main.py')):
+    # If invoked from packaging/ directory, go up one level
+    root_dir = os.path.dirname(root_dir)
+
 main_py = os.path.join(root_dir, 'src', 'verax', 'main.py')
+
+if not os.path.exists(main_py):
+    raise FileNotFoundError(f"Cannot find main.py at {main_py}. Ensure PyInstaller is invoked from project root.")
 
 a = Analysis(
     [main_py],
