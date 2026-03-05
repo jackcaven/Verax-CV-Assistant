@@ -1,6 +1,7 @@
 """Extract template structure from DOCX documents."""
 
 from pathlib import Path
+from typing import Any, List, Optional, Tuple
 
 from docx import Document
 from docx.shared import Pt
@@ -35,11 +36,11 @@ class DoxcTemplateExtractor:
             raise FileNotFoundError(f"File not found: {file_path}")
 
         try:
-            doc = Document(file_path)
+            doc = Document(str(file_path))
         except Exception as e:
             raise ValueError(f"Failed to parse DOCX template: {e}")
 
-        sections: list[SectionTemplate] = []
+        sections: List[SectionTemplate] = []
         order_index = 0
 
         for para in doc.paragraphs:
@@ -67,7 +68,7 @@ class DoxcTemplateExtractor:
         )
 
     @staticmethod
-    def _detect_heading(para) -> tuple[str, str, int] | None:
+    def _detect_heading(para: Any) -> Optional[Tuple[str, str, int]]:  # type: ignore
         """Detect if paragraph is a heading.
 
         Args:

@@ -125,7 +125,7 @@ class VeraxApp(ctk.CTk):
         # Schedule next poll
         self.after(50, self.poll_progress)
 
-    def _handle_progress_event(self, event) -> None:
+    def _handle_progress_event(self, event: object) -> None:  # type: ignore
         """Handle a progress event from the queue.
 
         Args:

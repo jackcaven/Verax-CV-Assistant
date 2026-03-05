@@ -3,7 +3,7 @@
 import threading
 from pathlib import Path
 from tkinter import filedialog, messagebox
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 import customtkinter as ctk
 
@@ -27,7 +27,7 @@ logger = get_logger(__name__)
 class BatchPanel(ctk.CTkFrame):
     """Panel for batch processing multiple CVs."""
 
-    def __init__(self, master, session: Session, **kwargs):
+    def __init__(self, master: object, session: Session, **kwargs):  # type: ignore
         """Initialize batch panel.
 
         Args:
@@ -40,7 +40,7 @@ class BatchPanel(ctk.CTkFrame):
         self.cv_files: List[Path] = []
         self.progress_dict: Dict[str, int] = {}  # filename -> percent
         self.is_processing = False
-        self.processing_thread: threading.Thread | None = None
+        self.processing_thread: Optional[threading.Thread] = None
 
         self._create_widgets()
 
@@ -292,7 +292,7 @@ class BatchPanel(ctk.CTkFrame):
             )
             messagebox.showinfo("Info", msg)
 
-    def update_progress(self, event) -> None:
+    def update_progress(self, event: Any) -> None:  # type: ignore
         """Update progress for a single CV.
 
         Args:

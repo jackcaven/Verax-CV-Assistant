@@ -2,7 +2,7 @@
 
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-from typing import List, Optional
+from typing import Callable, List, Optional, Tuple
 
 from verax.core.pipeline import ProcessingPipeline
 from verax.models.config import AppConfig
@@ -29,8 +29,8 @@ class BatchProcessor:
         self,
         cv_paths: List[Path],
         template_schema: TemplateSchema,
-        progress_callback: Optional[callable] = None,
-    ) -> List[tuple[Path, StructuredCV | None, Optional[Exception]]]:
+        progress_callback: Optional[Callable] = None,
+    ) -> List[Tuple[Path, Optional[StructuredCV], Optional[Exception]]]:
         """Process multiple CVs in parallel.
 
         Args:

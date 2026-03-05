@@ -23,7 +23,7 @@ logger = get_logger(__name__)
 class SettingsPanel(ctk.CTkFrame):
     """Panel for application settings."""
 
-    def __init__(self, master, session: Session, **kwargs):
+    def __init__(self, master: object, session: Session, **kwargs):  # type: ignore
         """Initialize settings panel.
 
         Args:

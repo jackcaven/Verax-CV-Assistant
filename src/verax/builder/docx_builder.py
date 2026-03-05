@@ -2,11 +2,12 @@
 
 import shutil
 from pathlib import Path
+from typing import Any, List
 
 from docx import Document
 
-from verax.models.structured_cv import CVEntry, CVSection, StructuredCV
-from verax.models.template_schema import TemplateSchema
+from verax.models.structured_cv import CVEntry, CVSection, ContactInfo, StructuredCV
+from verax.models.template_schema import SectionTemplate, TemplateSchema
 from verax.template.fallback import get_fallback_template
 from verax.utils import get_logger
 
@@ -57,7 +58,7 @@ class DocxBuilder:
 
         # Load copied document
         try:
-            doc = Document(output_path)
+            doc = Document(str(output_path))
         except Exception as e:
             raise ValueError(f"Failed to load template DOCX: {e}")
 
@@ -74,7 +75,7 @@ class DocxBuilder:
 
         # Save
         try:
-            doc.save(output_path)
+            doc.save(str(output_path))
             logger.info(f"DOCX saved: {output_path}")
         except Exception as e:
             raise IOError(f"Failed to save DOCX: {e}")
@@ -95,7 +96,7 @@ class DocxBuilder:
             return get_fallback_template()
 
     @staticmethod
-    def _clear_body(doc: Document) -> None:
+    def _clear_body(doc: Any) -> None:  # type: ignore
         """Remove all body paragraphs except those with heading styles.
 
         Preserves heading styles as structural references for later insertion.
@@ -119,7 +120,9 @@ class DocxBuilder:
         logger.debug(f"Cleared {len(paras_to_remove)} non-heading paragraphs")
 
     @staticmethod
-    def _add_contact_block(doc: Document, contact_info, template_schema: TemplateSchema) -> None:
+    def _add_contact_block(
+        doc: Any, contact_info: ContactInfo, template_schema: TemplateSchema  # type: ignore
+    ) -> None:
         """Add contact information block at the beginning of document.
 
         Args:
@@ -192,7 +195,9 @@ class DocxBuilder:
         logger.debug(f"Added {len(template_schema.sections)} sections")
 
     @staticmethod
-    def _add_section(doc: Document, template_section, cv_section: CVSection) -> None:
+    def _add_section(
+        doc: Any, template_section: SectionTemplate, cv_section: CVSection  # type: ignore
+    ) -> None:
         """Add a single section with entries.
 
         Args:
@@ -249,7 +254,9 @@ class DocxBuilder:
                     doc.add_paragraph(line, style="List Bullet")
 
     @staticmethod
-    def _add_placeholder_section(doc: Document, template_section) -> None:
+    def _add_placeholder_section(
+        doc: Any, template_section: SectionTemplate  # type: ignore
+    ) -> None:
         """Add empty placeholder for missing section.
 
         Args:

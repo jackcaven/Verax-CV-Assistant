@@ -3,6 +3,7 @@
 import threading
 from pathlib import Path
 from tkinter import filedialog, messagebox
+from typing import Any, Dict, List, Optional
 
 import customtkinter as ctk
 
@@ -25,7 +26,7 @@ logger = get_logger(__name__)
 class ExportPanel(ctk.CTkFrame):
     """Panel for exporting processed CVs."""
 
-    def __init__(self, master, session: Session, **kwargs):
+    def __init__(self, master: object, session: Session, **kwargs):  # type: ignore
         """Initialize export panel.
 
         Args:
@@ -37,7 +38,7 @@ class ExportPanel(ctk.CTkFrame):
         self.session = session
         self.export_dir: Path = Path.home() / "Documents"
         self.is_exporting = False
-        self.export_thread: threading.Thread | None = None
+        self.export_thread: Optional[threading.Thread] = None
 
         self._create_widgets()
 
@@ -190,7 +191,7 @@ class ExportPanel(ctk.CTkFrame):
         self.export_thread.start()
         logger.info(f"Starting export to {self.export_dir}")
 
-    def _export_worker(self, batch_results, formats: list) -> None:
+    def _export_worker(self, batch_results: Dict, formats: List[str]) -> None:  # type: ignore
         """Background worker for exporting CVs."""
         try:
             success_count = 0

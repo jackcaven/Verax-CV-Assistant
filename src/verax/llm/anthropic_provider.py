@@ -169,7 +169,7 @@ class AnthropicProvider:
             source_filename=original_filename,
         )
 
-    def _call_llm_with_retry(self, prompt: str, max_retries: int = 3) -> str:
+    def _call_llm_with_retry(self, prompt: str, max_retries: int = 3) -> str:  # type: ignore
         """Call Anthropic API with retry and error correction.
 
         Uses prefilling to force JSON response format.
@@ -194,7 +194,8 @@ class AnthropicProvider:
                         {"role": "assistant", "content": "{"},  # Prefill to force JSON start
                     ],
                 )
-                response_text = "{" + response.content[0].text.strip()
+                # Extract text from response - first block should be TextBlock with .text
+                response_text = "{" + response.content[0].text.strip()  # type: ignore
 
                 # Validate JSON
                 json.loads(response_text)

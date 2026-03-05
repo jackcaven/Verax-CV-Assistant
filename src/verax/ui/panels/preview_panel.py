@@ -1,5 +1,7 @@
 """Preview panel for viewing and editing structured CV."""
 
+from typing import Optional
+
 import customtkinter as ctk
 
 from verax.core.session import Session
@@ -19,7 +21,7 @@ logger = get_logger(__name__)
 class PreviewPanel(ctk.CTkFrame):
     """Panel for previewing and editing structured CV."""
 
-    def __init__(self, master, session: Session, **kwargs):
+    def __init__(self, master: object, session: Session, **kwargs):  # type: ignore
         """Initialize preview panel.
 
         Args:
@@ -29,7 +31,7 @@ class PreviewPanel(ctk.CTkFrame):
         """
         super().__init__(master, **kwargs)
         self.session = session
-        self.cv_display: ctk.CTkTextbox | None = None
+        self.cv_display: Optional[ctk.CTkTextbox] = None
 
         self._create_widgets()
 

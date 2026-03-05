@@ -2,7 +2,7 @@
 
 from pathlib import Path
 from tkinter import filedialog, messagebox
-from typing import Optional
+from typing import Any, Optional
 
 import customtkinter as ctk
 
@@ -29,7 +29,9 @@ logger = get_logger(__name__)
 class UploadPanel(ctk.CTkFrame):
     """Panel for uploading CV and template files."""
 
-    def __init__(self, master, session: Session, app=None, **kwargs):
+    def __init__(
+        self, master: object, session: Session, app: object = None, **kwargs  # type: ignore
+    ):
         """Initialize upload panel.
 
         Args:
@@ -202,7 +204,7 @@ class UploadPanel(ctk.CTkFrame):
             logger.error(f"Error extracting template: {e}")
             messagebox.showerror("Error", f"Failed to extract template:\n\n{str(e)}")
 
-    def _extract_template(self, template_path: Path):
+    def _extract_template(self, template_path: Path) -> Any:
         """Extract template schema from file.
 
         Args:

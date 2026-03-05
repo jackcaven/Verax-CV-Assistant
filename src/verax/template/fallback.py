@@ -36,6 +36,6 @@ def get_fallback_template() -> Path:
             # If decoding fails, create a minimal empty document
             from docx import Document
             doc = Document()
-            doc.save(fallback_path)
+            doc.save(str(fallback_path))
 
     return fallback_path

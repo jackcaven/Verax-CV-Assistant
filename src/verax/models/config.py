@@ -2,7 +2,7 @@
 
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Optional
+from typing import Any, Dict, List, Optional
 
 
 class PrivacyMode(Enum):
@@ -39,11 +39,11 @@ class AppConfig:
     privacy_mode: PrivacyMode = PrivacyMode.FULL
     openai_api_key: Optional[str] = None
     anthropic_api_key: Optional[str] = None
-    output_formats: list[OutputFormat] = field(default_factory=lambda: [OutputFormat.DOCX])
+    output_formats: List[OutputFormat] = field(default_factory=lambda: [OutputFormat.DOCX])
     batch_parallel_count: int = 1
     enhance_text: bool = True
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> Dict[str, Any]:
         """Serialize to JSON (excluding sensitive keys).
 
         Returns:
@@ -58,7 +58,7 @@ class AppConfig:
         }
 
     @classmethod
-    def from_dict(cls, data: dict) -> "AppConfig":
+    def from_dict(cls, data: Dict[str, Any]) -> "AppConfig":
         """Deserialize from JSON dictionary.
 
         Args:

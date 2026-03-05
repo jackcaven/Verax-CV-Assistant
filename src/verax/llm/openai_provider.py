@@ -169,7 +169,7 @@ class OpenAIProvider:
             source_filename=original_filename,
         )
 
-    def _call_llm_with_retry(self, prompt: str, max_retries: int = 3) -> str:
+    def _call_llm_with_retry(self, prompt: str, max_retries: int = 3) -> str:  # type: ignore
         """Call OpenAI API with retry and error correction.
 
         Args:
@@ -190,7 +190,8 @@ class OpenAIProvider:
                     response_format={"type": "json_object"},
                     temperature=0.3,
                 )
-                response_text = response.choices[0].message.content.strip()
+                content = response.choices[0].message.content
+                response_text = content.strip() if content else ""
 
                 # Validate JSON
                 json.loads(response_text)

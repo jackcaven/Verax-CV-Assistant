@@ -32,7 +32,7 @@ class DoxcParser:
             raise FileNotFoundError(f"File not found: {file_path}")
 
         try:
-            doc = Document(file_path)
+            doc = Document(str(file_path))
         except Exception as e:
             raise ValueError(f"Failed to parse DOCX file: {e}")
 

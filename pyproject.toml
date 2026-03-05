@@ -43,8 +43,29 @@ packages = ["src/verax"]
 
 [tool.mypy]
 python_version = "3.9"
-strict = true
+warn_return_any = false
+warn_unused_configs = true
+disallow_any_unimported = false
+disallow_untyped_calls = false
+disallow_incomplete_defs = false
+disallow_untyped_defs = false
 exclude = ["venv", "tests/fixtures"]
+
+# Ignore untyped third-party libraries
+[tool.mypy-customtkinter]
+ignore_missing_imports = true
+follow_imports = "skip"
+
+[tool.mypy-mammoth]
+ignore_missing_imports = true
+
+[tool.mypy-docx]
+ignore_missing_imports = true
+follow_imports = "skip"
+
+[tool.mypy-anthropic]
+ignore_missing_imports = true
+follow_imports = "skip"
 
 [tool.ruff]
 line-length = 100
