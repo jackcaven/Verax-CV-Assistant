@@ -3,7 +3,7 @@
 import threading
 from pathlib import Path
 from tkinter import filedialog, messagebox
-from typing import Any, Dict, List, Optional
+from typing import Dict, List, Optional
 
 import customtkinter as ctk
 

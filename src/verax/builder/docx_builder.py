@@ -2,11 +2,11 @@
 
 import shutil
 from pathlib import Path
-from typing import Any, List
+from typing import Any
 
 from docx import Document
 
-from verax.models.structured_cv import CVEntry, CVSection, ContactInfo, StructuredCV
+from verax.models.structured_cv import ContactInfo, CVEntry, CVSection, StructuredCV
 from verax.models.template_schema import SectionTemplate, TemplateSchema
 from verax.template.fallback import get_fallback_template
 from verax.utils import get_logger
