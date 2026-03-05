@@ -1,11 +1,44 @@
 #!/bin/bash
-# Build Verax for Windows
+# Build Verax for Windows with PyInstaller
+# Usage: bash packaging/build_windows.sh
 
 set -e
 
-cd "$(dirname "$0")/.."
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+cd "$ROOT"
 
-echo "Building Verax for Windows..."
-python -m PyInstaller packaging/verax.spec --distpath=dist/windows
+echo "=========================================="
+echo "Building Verax CV Assistant for Windows"
+echo "=========================================="
+echo ""
 
-echo "Build complete. Executable: dist/windows/Verax/Verax.exe"
+# Check prerequisites
+if ! command -v python &> /dev/null; then
+    echo "ERROR: Python not found. Please install Python 3.9+"
+    exit 1
+fi
+
+if ! python -c "import PyInstaller" 2>/dev/null; then
+    echo "ERROR: PyInstaller not found. Install with: pip install PyInstaller"
+    exit 1
+fi
+
+# Clean previous builds
+echo "Cleaning previous builds..."
+rm -rf build dist/windows *.spec *.log
+
+# Build
+echo "Running PyInstaller..."
+python -m PyInstaller packaging/verax.spec --distpath=dist/windows --clean --noconfirm
+
+echo ""
+echo "=========================================="
+echo "Build complete!"
+echo "=========================================="
+echo ""
+echo "Executable location:"
+echo "  dist/windows/Verax/Verax.exe"
+echo ""
+echo "To run:"
+echo "  ./dist/windows/Verax/Verax.exe"
+echo ""

@@ -3,7 +3,8 @@
     "allow": [
       "Bash(python3:*)",
       "Bash(python:*)",
-      "Bash(PYTHONPATH=src python:*)"
+      "Bash(PYTHONPATH=src python:*)",
+      "Bash(pip install:*)"
     ]
   }
 }

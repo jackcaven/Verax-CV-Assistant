@@ -46,6 +46,42 @@ export OPENAI_API_KEY=sk-...
 export ANTHROPIC_API_KEY=sk-ant-...
 ```
 
+## Building & Distribution
+
+### Prerequisites
+- Python 3.9+
+- PyInstaller: `pip install PyInstaller`
+- (Optional) LibreOffice for PDF export
+
+### Build for Your Platform
+
+**Windows:**
+```bash
+bash packaging/build_windows.sh
+# Output: dist/windows/Verax/Verax.exe
+```
+
+**macOS:**
+```bash
+bash packaging/build_macos.sh
+# Output: dist/macos/Verax/Verax.app
+```
+
+**Linux:**
+```bash
+bash packaging/build_linux.sh
+# Output: dist/linux/Verax/Verax
+```
+
+### Self-Contained Distribution
+
+PyInstaller creates a self-contained folder with all dependencies bundled. Users can run the executable without Python installed.
+
+**Optional: Create native installers**
+- Windows: Use NSIS or WiX (not included)
+- macOS: Use `dmg-builder` to create .dmg
+- Linux: Use `py2deb` for .deb packages or `appimagetool` for AppImage
+
 ## Architecture
 
 See [CLAUDE.md](CLAUDE.md) for detailed architecture and development guide.
