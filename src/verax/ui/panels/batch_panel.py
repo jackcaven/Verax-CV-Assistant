@@ -36,6 +36,7 @@ class BatchPanel(ctk.CTkFrame):
             **kwargs: Additional frame arguments
         """
         super().__init__(master, **kwargs)
+        self.pack(fill="both", expand=True)
         self.session = session
         self.cv_files: List[Path] = []
         self.progress_dict: Dict[str, int] = {}  # filename -> percent

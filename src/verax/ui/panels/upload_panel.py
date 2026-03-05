@@ -41,6 +41,7 @@ class UploadPanel(ctk.CTkFrame):
             **kwargs: Additional frame arguments
         """
         super().__init__(master, **kwargs)
+        self.pack(fill="both", expand=True)
         self.session = session
         self.app = app
         self.cv_path: Optional[Path] = None
@@ -50,9 +51,13 @@ class UploadPanel(ctk.CTkFrame):
 
     def _create_widgets(self) -> None:
         """Create and layout upload panel widgets."""
+        # Scrollable container for better UX
+        scroll_container = ctk.CTkScrollableFrame(self, fg_color="transparent")
+        scroll_container.pack(fill="both", expand=True, padx=PADDING_STANDARD, pady=PADDING_STANDARD)
+
         # Title
         title = ctk.CTkLabel(
-            self,
+            scroll_container,
             text="Upload CV and Template",
             font=FONT_HEADING,
             text_color=COLORS["text_primary"],
@@ -60,7 +65,7 @@ class UploadPanel(ctk.CTkFrame):
         title.pack(pady=PADDING_LARGE, padx=PADDING_STANDARD)
 
         # CV section
-        cv_frame = ctk.CTkFrame(self, fg_color=COLORS["bg_secondary"])
+        cv_frame = ctk.CTkFrame(scroll_container, fg_color=COLORS["bg_secondary"])
         cv_frame.pack(fill="x", padx=PADDING_LARGE, pady=PADDING_STANDARD)
 
         cv_label = ctk.CTkLabel(
@@ -91,7 +96,7 @@ class UploadPanel(ctk.CTkFrame):
         cv_button.pack(pady=PADDING_STANDARD, padx=PADDING_STANDARD)
 
         # Template section
-        template_frame = ctk.CTkFrame(self, fg_color=COLORS["bg_secondary"])
+        template_frame = ctk.CTkFrame(scroll_container, fg_color=COLORS["bg_secondary"])
         template_frame.pack(fill="x", padx=PADDING_LARGE, pady=PADDING_STANDARD)
 
         template_label = ctk.CTkLabel(
@@ -122,7 +127,7 @@ class UploadPanel(ctk.CTkFrame):
         template_button.pack(pady=PADDING_STANDARD, padx=PADDING_STANDARD)
 
         # Action buttons
-        button_frame = ctk.CTkFrame(self, fg_color="transparent")
+        button_frame = ctk.CTkFrame(scroll_container, fg_color="transparent")
         button_frame.pack(pady=PADDING_LARGE)
 
         next_button = ctk.CTkButton(

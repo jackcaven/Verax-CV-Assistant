@@ -30,6 +30,7 @@ class PreviewPanel(ctk.CTkFrame):
             **kwargs: Additional frame arguments
         """
         super().__init__(master, **kwargs)
+        self.pack(fill="both", expand=True)
         self.session = session
         self.cv_display: Optional[ctk.CTkTextbox] = None
 
