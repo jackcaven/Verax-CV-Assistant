@@ -9,7 +9,7 @@ Build with:
 block_cipher = None
 
 a = Analysis(
-    ['../src/verax/main.py'],
+    ['src/verax/main.py'],
     pathex=[],
     binaries=[],
     datas=[
@@ -20,7 +20,7 @@ a = Analysis(
         'anthropic',
         'openai',
         'pdfplumber',
-        'python-docx',
+        'docx',
         'mammoth',
         'keyring',
         'platformdirs',
