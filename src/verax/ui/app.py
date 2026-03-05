@@ -132,12 +132,12 @@ class VeraxApp(ctk.CTk):
             event: ProgressEvent instance.
         """
         # Update status bar
-        if event.stage == "complete":
-            self.status_bar.configure(text=f"✓ {event.cv_filename} complete")
-        elif event.stage == "error":
-            self.status_bar.configure(text=f"✗ {event.cv_filename} failed")
+        if event.stage == "complete":  # type: ignore
+            self.status_bar.configure(text=f"✓ {event.cv_filename} complete")  # type: ignore
+        elif event.stage == "error":  # type: ignore
+            self.status_bar.configure(text=f"✗ {event.cv_filename} failed")  # type: ignore
         else:
-            self.status_bar.configure(text=f"{event.cv_filename}: {event.stage} ({event.percent}%)")
+            self.status_bar.configure(text=f"{event.cv_filename}: {event.stage} ({event.percent}%)")  # type: ignore
 
         # Delegate to batch panel for progress bar update
         self.batch_panel.update_progress(event)

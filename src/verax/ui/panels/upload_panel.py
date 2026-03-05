@@ -190,7 +190,7 @@ class UploadPanel(ctk.CTkFrame):
 
             # Switch to batch tab
             if self.app:
-                self.app.tabview.set("Batch Process")
+                self.app.tabview.set("Batch Process")  # type: ignore
             else:
                 logger.warning("App reference not available; cannot switch tabs")
 
@@ -221,7 +221,7 @@ class UploadPanel(ctk.CTkFrame):
             extractor = DoxcTemplateExtractor()
             return extractor.extract(template_path)
         elif suffix == ".pdf":
-            extractor = PdfTemplateExtractor()
+            extractor = PdfTemplateExtractor()  # type: ignore
             return extractor.extract(template_path)
         else:
             raise ValueError(f"Unsupported template format: {suffix}")

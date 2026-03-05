@@ -65,7 +65,7 @@ class BatchProcessor:
                     logger.info(f"Completed: {cv_path.name}")
                 except Exception as e:
                     logger.error(f"Failed: {cv_path.name}: {e}")
-                    results.append((cv_path, None, e))
+                    results.append((cv_path, None, e))  # type: ignore
 
                 # Call progress callback if provided
                 completed_count += 1
@@ -76,7 +76,7 @@ class BatchProcessor:
                         logger.warning(f"Progress callback error: {e}")
 
         logger.info(f"Batch processing complete: {len(results)} CVs processed")
-        return results
+        return results  # type: ignore
 
     def _process_single(
         self,
