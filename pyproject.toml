@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "verax"
+version = "0.1.0"
+description = "CV structuring and template-based rebuilding with LLM"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "Verax Team" }
+]
+requires-python = ">=3.9"
+
+dependencies = [
+    "customtkinter>=5.2.2",
+    "pdfplumber>=0.11.0",
+    "python-docx>=1.1.0",
+    "mammoth>=1.7.0",
+    "openai>=1.30.0",
+    "anthropic>=0.28.0",
+    "jinja2>=3.1.4",
+    "python-dotenv>=1.0.1",
+    "keyring>=25.2.0",
+    "platformdirs>=4.2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-cov>=4.1.0",
+    "mypy>=1.5.0",
+    "ruff>=0.1.0",
+    "pyinstaller>=6.0.0",
+]
+
+[project.scripts]
+verax = "verax.main:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/verax"]
+
+[tool.mypy]
+python_version = "3.9"
+strict = true
+exclude = ["venv", "tests/fixtures"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--cov=src/verax --cov-report=html --cov-report=term-missing"
+python_files = "test_*.py"
