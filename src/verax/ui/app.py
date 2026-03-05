@@ -6,11 +6,8 @@ import customtkinter as ctk
 
 from verax.core.session import Session
 from verax.models.config import AppConfig
-from verax.ui.panels.batch_panel import BatchPanel
-from verax.ui.panels.export_panel import ExportPanel
-from verax.ui.panels.preview_panel import PreviewPanel
+from verax.ui.panels.process_panel import ProcessPanel
 from verax.ui.panels.settings_panel import SettingsPanel
-from verax.ui.panels.upload_panel import UploadPanel
 from verax.ui.styles import (
     COLORS,
     PADDING_STANDARD,
@@ -77,25 +74,12 @@ class VeraxApp(ctk.CTk):
         self.tabview.pack(fill="both", expand=True, padx=PADDING_STANDARD, pady=PADDING_STANDARD)
 
         # Create tabs
-        self.upload_panel = UploadPanel(
-            self.tabview.add(TABS["upload"]),
-            session=self.session,
-            app=self,
-        )
-        self.batch_panel = BatchPanel(
-            self.tabview.add(TABS["batch"]),
+        self.process_panel = ProcessPanel(
+            self.tabview.add(TABS["process"]),
             session=self.session,
         )
         self.settings_panel = SettingsPanel(
             self.tabview.add(TABS["settings"]),
-            session=self.session,
-        )
-        self.preview_panel = PreviewPanel(
-            self.tabview.add(TABS["preview"]),
-            session=self.session,
-        )
-        self.export_panel = ExportPanel(
-            self.tabview.add(TABS["export"]),
             session=self.session,
         )
 
@@ -139,8 +123,8 @@ class VeraxApp(ctk.CTk):
         else:
             self.status_bar.configure(text=f"{event.cv_filename}: {event.stage} ({event.percent}%)")  # type: ignore
 
-        # Delegate to batch panel for progress bar update
-        self.batch_panel.update_progress(event)
+        # Delegate to process panel for progress log update
+        self.process_panel.update_progress(event)
 
     def run(self) -> None:
         """Start the application event loop."""

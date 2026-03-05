@@ -32,11 +32,8 @@ FONT_SMALL = ("Arial", 9)
 
 # Tab names
 TABS = {
-    "upload": "Upload",
-    "batch": "Batch Process",
+    "process": "Process",
     "settings": "Settings",
-    "preview": "Preview",
-    "export": "Export",
 }
 
 # Button sizes
