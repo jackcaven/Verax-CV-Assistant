@@ -53,7 +53,9 @@ class UploadPanel(ctk.CTkFrame):
         """Create and layout upload panel widgets."""
         # Scrollable container for better UX
         scroll_container = ctk.CTkScrollableFrame(self, fg_color="transparent")
-        scroll_container.pack(fill="both", expand=True, padx=PADDING_STANDARD, pady=PADDING_STANDARD)
+        scroll_container.pack(
+            fill="both", expand=True, padx=PADDING_STANDARD, pady=PADDING_STANDARD
+        )
 
         # Title
         title = ctk.CTkLabel(

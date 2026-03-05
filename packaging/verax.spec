@@ -6,10 +6,18 @@ Build with:
   python -m PyInstaller packaging/verax.spec --distpath=dist/[windows|macos|linux]
 """
 
+import os
+import sys
+
 block_cipher = None
 
+# Compute absolute path to main.py (spec file is in packaging/ dir)
+spec_dir = os.path.dirname(os.path.abspath(__file__))
+root_dir = os.path.dirname(spec_dir)
+main_py = os.path.join(root_dir, 'src', 'verax', 'main.py')
+
 a = Analysis(
-    ['../src/verax/main.py'],
+    [main_py],
     pathex=[],
     binaries=[],
     datas=[
