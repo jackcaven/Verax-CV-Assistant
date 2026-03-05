@@ -108,6 +108,7 @@ jobs:
         run: ${{ matrix.script }}
 
       - name: Check build artifacts
+        shell: bash
         run: |
           echo "Build artifacts:"
           find ${{ matrix.artifact-dir }} -type f -name "${{ matrix.asset-pattern }}" 2>/dev/null || echo "Pattern not found, listing directory:"
@@ -122,6 +123,7 @@ jobs:
 
       - name: Generate build report
         if: always()
+        shell: bash
         run: |
           echo "## Build Report: ${{ matrix.os }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
