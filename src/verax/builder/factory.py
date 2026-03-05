@@ -1,6 +1,6 @@
 """Factory for creating output builders by format."""
 
-from typing import Literal
+from typing import Any
 
 from verax.utils import get_logger
 
@@ -11,7 +11,7 @@ class BuilderFactory:
     """Factory for creating output builders."""
 
     @staticmethod
-    def create(format_name: str) -> "OutputBuilder":  # type: ignore
+    def create(format_name: str) -> Any:
         """Create an output builder by format name.
 
         Args:

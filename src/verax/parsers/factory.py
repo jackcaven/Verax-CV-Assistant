@@ -1,6 +1,7 @@
 """Factory for selecting document parsers by file type."""
 
 from pathlib import Path
+
 from verax.parsers.base import DocumentParser
 from verax.utils import get_logger
 

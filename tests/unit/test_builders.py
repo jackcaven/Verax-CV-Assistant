@@ -6,8 +6,8 @@ from pathlib import Path
 import pytest
 from docx import Document
 
-from verax.builder.factory import BuilderFactory
 from verax.builder.docx_builder import DocxBuilder
+from verax.builder.factory import BuilderFactory
 from verax.builder.html_builder import HtmlBuilder
 from verax.builder.pdf_builder import detect_libreoffice
 from verax.models.structured_cv import ContactInfo, CVEntry, CVSection, SectionType, StructuredCV

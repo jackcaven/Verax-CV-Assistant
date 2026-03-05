@@ -122,7 +122,8 @@ HTML_TEMPLATE = """
 <body>
     <div class="contact-block">
         <h1>{{ contact_info.name }}</h1>
-        {% if contact_info.email or contact_info.phone or contact_info.location or contact_info.website or contact_info.linkedin %}
+        {% if (contact_info.email or contact_info.phone or contact_info.location
+                or contact_info.website or contact_info.linkedin) %}
         <div class="contact-info">
             {% set info_parts = [] %}
             {% if contact_info.email %}
@@ -153,7 +154,9 @@ HTML_TEMPLATE = """
             <div class="entry">
                 <div class="entry-header">
                     {% if entry.title and entry.subtitle %}
-                        <span class="entry-title">{{ entry.title }}<span class="entry-separator">—</span><span class="entry-subtitle">{{ entry.subtitle }}</span></span>
+                        <span class="entry-title">{{ entry.title }}</span>
+                        <span class="entry-separator">—</span>
+                        <span class="entry-subtitle">{{ entry.subtitle }}</span>
                     {% elif entry.title %}
                         <span class="entry-title">{{ entry.title }}</span>
                     {% elif entry.subtitle %}

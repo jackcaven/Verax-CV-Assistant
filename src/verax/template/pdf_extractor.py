@@ -2,6 +2,7 @@
 
 from pathlib import Path
 from statistics import median
+
 import pdfplumber
 
 from verax.models.template_schema import SectionTemplate, TemplateSchema

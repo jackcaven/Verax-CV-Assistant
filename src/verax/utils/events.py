@@ -1,11 +1,19 @@
 """Progress event system for multi-threaded processing."""
 
 from dataclasses import dataclass
-from typing import Literal
 from queue import Queue
+from typing import Literal
 
 # Type for processing stages
-StageType = Literal["parsing", "extracting", "mapping", "enhancing", "building", "complete", "error"]
+StageType = Literal[
+    "parsing",
+    "extracting",
+    "mapping",
+    "enhancing",
+    "building",
+    "complete",
+    "error",
+]
 
 
 @dataclass(frozen=True)
@@ -35,5 +43,5 @@ def clear_queue() -> None:
     while not progress_queue.empty():
         try:
             progress_queue.get_nowait()
-        except:
+        except Exception:
             break

@@ -1,12 +1,13 @@
 """Main processing pipeline for CV transformation."""
 
 from pathlib import Path
+
+from verax.llm.factory import LLMProviderFactory
+from verax.models.config import AppConfig
 from verax.models.structured_cv import StructuredCV
 from verax.models.template_schema import TemplateSchema
-from verax.models.config import AppConfig
 from verax.parsers import ParserFactory
-from verax.llm.factory import LLMProviderFactory
-from verax.utils import get_logger, emit_progress, ProgressEvent
+from verax.utils import ProgressEvent, emit_progress, get_logger
 
 logger = get_logger(__name__)
 
@@ -79,7 +80,7 @@ class ProcessingPipeline:
         try:
             emit_progress(ProgressEvent(cv_path.name, "mapping", 60))
             cv = self.llm_provider.map_sections(cv, template_schema)
-            logger.debug(f"Mapped sections to template")
+            logger.debug("Mapped sections to template")
             emit_progress(ProgressEvent(cv_path.name, "mapping", 75))
         except Exception as e:
             logger.error(f"Mapping error: {e}")
@@ -91,7 +92,7 @@ class ProcessingPipeline:
             try:
                 emit_progress(ProgressEvent(cv_path.name, "enhancing", 85))
                 cv = self.llm_provider.enhance_text(cv)
-                logger.debug(f"Enhanced text")
+                logger.debug("Enhanced text")
                 emit_progress(ProgressEvent(cv_path.name, "enhancing", 95))
             except Exception as e:
                 logger.warning(f"Enhancement failed (non-fatal): {e}")

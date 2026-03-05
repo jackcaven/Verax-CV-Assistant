@@ -1,8 +1,9 @@
 """Main entry point for Verax CV Assistant."""
 
 import sys
-from verax.utils import setup_logging, get_logger, load_config
+
 from verax.ui.app import create_app
+from verax.utils import get_logger, load_config, setup_logging
 
 logger = get_logger(__name__)
 

@@ -1,6 +1,7 @@
 """Extract template structure from DOCX documents."""
 
 from pathlib import Path
+
 from docx import Document
 from docx.shared import Pt
 

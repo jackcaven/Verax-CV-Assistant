@@ -4,7 +4,7 @@ import json
 import os
 from typing import Optional
 
-from openai import OpenAI, APIError
+from openai import APIError, OpenAI
 
 from verax.llm.prompts import EXTRACT_CV_PROMPT, SECTION_MAPPING_PROMPT, TEXT_ENHANCEMENT_PROMPT
 from verax.models.structured_cv import ContactInfo, CVEntry, CVSection, SectionType, StructuredCV
@@ -201,9 +201,8 @@ class OpenAIProvider:
                 logger.warning(f"JSON decode error (attempt {attempt + 1}): {e}")
                 if attempt < max_retries - 1:
                     # Retry with error correction prompt
-                    prompt = (
-                        f"Previous response had JSON error. Please return ONLY valid JSON.\n\n{prompt}"
-                    )
+                    prefix = "Return ONLY valid JSON:\n\n"
+                    prompt = prefix + prompt
                     continue
                 raise ValueError(f"Failed to get valid JSON response after {max_retries} attempts")
 

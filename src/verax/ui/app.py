@@ -1,26 +1,26 @@
 """Main application window for Verax CV Assistant."""
 
-import customtkinter as ctk
-from pathlib import Path
 from typing import Optional
 
-from verax.models.config import AppConfig
+import customtkinter as ctk
+
 from verax.core.session import Session
-from verax.utils import get_logger
-from verax.utils.events import progress_queue
+from verax.models.config import AppConfig
+from verax.ui.panels.batch_panel import BatchPanel
+from verax.ui.panels.export_panel import ExportPanel
+from verax.ui.panels.preview_panel import PreviewPanel
+from verax.ui.panels.settings_panel import SettingsPanel
+from verax.ui.panels.upload_panel import UploadPanel
 from verax.ui.styles import (
     COLORS,
-    WINDOW_WIDTH,
-    WINDOW_HEIGHT,
-    WINDOW_TITLE,
     PADDING_STANDARD,
     TABS,
+    WINDOW_HEIGHT,
+    WINDOW_TITLE,
+    WINDOW_WIDTH,
 )
-from verax.ui.panels.upload_panel import UploadPanel
-from verax.ui.panels.batch_panel import BatchPanel
-from verax.ui.panels.settings_panel import SettingsPanel
-from verax.ui.panels.preview_panel import PreviewPanel
-from verax.ui.panels.export_panel import ExportPanel
+from verax.utils import get_logger
+from verax.utils.events import progress_queue
 
 logger = get_logger(__name__)
 

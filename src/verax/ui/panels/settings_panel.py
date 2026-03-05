@@ -1,21 +1,21 @@
 """Settings panel for LLM provider, API keys, and privacy mode."""
 
-import customtkinter as ctk
-from typing import Optional
 from tkinter import messagebox
 
+import customtkinter as ctk
+
 from verax.core.session import Session
-from verax.models.config import AppConfig, PrivacyMode, OutputFormat
-from verax.utils import get_logger, get_api_key, set_api_key, save_config
+from verax.models.config import OutputFormat, PrivacyMode
 from verax.ui.styles import (
-    COLORS,
-    PADDING_STANDARD,
-    PADDING_LARGE,
-    FONT_HEADING,
-    FONT_STANDARD,
     BUTTON_HEIGHT,
     BUTTON_WIDTH_STANDARD,
+    COLORS,
+    FONT_HEADING,
+    FONT_STANDARD,
+    PADDING_LARGE,
+    PADDING_STANDARD,
 )
+from verax.utils import get_api_key, get_logger, save_config, set_api_key
 
 logger = get_logger(__name__)
 

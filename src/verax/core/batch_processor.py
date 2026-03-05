@@ -1,13 +1,13 @@
 """Batch processing for multiple CVs with parallel execution."""
 
-from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
 from typing import List, Optional
 
 from verax.core.pipeline import ProcessingPipeline
+from verax.models.config import AppConfig
 from verax.models.structured_cv import StructuredCV
 from verax.models.template_schema import TemplateSchema
-from verax.models.config import AppConfig
 from verax.utils import get_logger
 
 logger = get_logger(__name__)

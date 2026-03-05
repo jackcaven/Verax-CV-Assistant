@@ -1,6 +1,7 @@
 """Parser for DOCX documents."""
 
 from pathlib import Path
+
 from docx import Document
 
 from verax.parsers.models import RawDocument

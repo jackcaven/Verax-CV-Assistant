@@ -5,7 +5,6 @@ from typing import Optional
 
 from verax.models.structured_cv import (
     ContactInfo,
-    CVEntry,
     CVSection,
     SectionType,
     StructuredCV,

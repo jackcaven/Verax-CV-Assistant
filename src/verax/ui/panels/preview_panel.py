@@ -3,16 +3,15 @@
 import customtkinter as ctk
 
 from verax.core.session import Session
-from verax.utils import get_logger
 from verax.ui.styles import (
-    COLORS,
-    PADDING_STANDARD,
-    PADDING_LARGE,
-    FONT_HEADING,
-    FONT_STANDARD,
     BUTTON_HEIGHT,
     BUTTON_WIDTH_STANDARD,
+    COLORS,
+    FONT_HEADING,
+    PADDING_LARGE,
+    PADDING_STANDARD,
 )
+from verax.utils import get_logger
 
 logger = get_logger(__name__)
 
@@ -92,7 +91,8 @@ class PreviewPanel(ctk.CTkFrame):
 
         cv = self.session.get_current_cv()
         if not cv:
-            self.cv_display.insert("1.0", "No CV loaded yet.\n\nUpload and process a CV to see preview.")
+            msg = "No CV loaded yet.\n\nUpload and process a CV to see preview."
+            self.cv_display.insert("1.0", msg)
             self.cv_display.configure(state="disabled")
             return
 

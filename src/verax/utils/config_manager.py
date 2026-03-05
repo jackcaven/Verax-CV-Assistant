@@ -2,6 +2,7 @@
 
 import json
 from pathlib import Path
+
 import platformdirs
 
 from verax.models.config import AppConfig

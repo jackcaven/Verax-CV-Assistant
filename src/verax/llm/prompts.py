@@ -39,7 +39,8 @@ CV Text:
 {cv_text}
 }}"""
 
-SECTION_MAPPING_PROMPT = """You are a CV section mapping expert. Reassign CV sections to match a template structure.
+SECTION_MAPPING_PROMPT = """You are a CV section mapping expert. Reassign CV sections to match a
+template structure.
 
 Current CV (JSON format):
 {current_cv_json}
@@ -53,7 +54,8 @@ If no good match exists, create an empty section with the template title.
 Return the updated CV in the same JSON schema, with sections reordered to match template.
 Return only valid JSON, no markdown."""
 
-TEXT_ENHANCEMENT_PROMPT = """You are a CV enhancement expert. Improve the clarity, impact, and conciseness of the following CV.
+TEXT_ENHANCEMENT_PROMPT = """You are a CV enhancement expert. Improve the clarity, impact, and
+conciseness of the following CV.
 
 Rules:
 - Keep the same tone and structure

@@ -1,22 +1,23 @@
 """Export panel for output format selection and preview."""
 
-import customtkinter as ctk
+import threading
 from pathlib import Path
 from tkinter import filedialog, messagebox
-import threading
 
-from verax.core.session import Session
+import customtkinter as ctk
+
 from verax.builder.factory import BuilderFactory
-from verax.utils import get_logger
+from verax.core.session import Session
 from verax.ui.styles import (
-    COLORS,
-    PADDING_STANDARD,
-    PADDING_LARGE,
-    FONT_HEADING,
-    FONT_STANDARD,
     BUTTON_HEIGHT,
     BUTTON_WIDTH_STANDARD,
+    COLORS,
+    FONT_HEADING,
+    FONT_STANDARD,
+    PADDING_LARGE,
+    PADDING_STANDARD,
 )
+from verax.utils import get_logger
 
 logger = get_logger(__name__)
 
@@ -165,7 +166,8 @@ class ExportPanel(ctk.CTkFrame):
 
         batch_results = self.session.get_batch_results()
         if not batch_results:
-            messagebox.showerror("Error", "No processed CVs to export. Please run batch processing first.")
+            msg = "No processed CVs to export. Please run batch processing first."
+            messagebox.showerror("Error", msg)
             return
 
         self.is_exporting = True
@@ -214,7 +216,9 @@ class ExportPanel(ctk.CTkFrame):
                     for format_name in formats:
                         # Check if format is available
                         if not BuilderFactory.is_available(format_name):
-                            logger.warning(f"Format {format_name} not available, skipping {cv_filename}")
+                            logger.warning(
+                                f"Format {format_name} not available, skipping {cv_filename}"
+                            )
                             continue
 
                         builder = BuilderFactory.create(format_name)
@@ -235,7 +239,10 @@ class ExportPanel(ctk.CTkFrame):
                     error_count += 1
 
             # Show summary
-            summary = f"Export complete!\n\n✓ {success_count} successful\n✗ {error_count} failed\n\nFiles saved to:\n{self.export_dir}"
+            summary = (
+                f"Export complete!\n\n✓ {success_count} successful\n"
+                f"✗ {error_count} failed\n\nFiles saved to:\n{self.export_dir}"
+            )
             messagebox.showinfo("Export Complete", summary)
             logger.info(f"Export finished: {success_count} successful, {error_count} failed")
 

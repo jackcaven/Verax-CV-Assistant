@@ -1,6 +1,7 @@
 """Parser for legacy .doc documents."""
 
 from pathlib import Path
+
 import mammoth
 
 from verax.parsers.models import RawDocument

@@ -1,6 +1,7 @@
 """Parser for PDF documents."""
 
 from pathlib import Path
+
 import pdfplumber
 
 from verax.parsers.models import RawDocument

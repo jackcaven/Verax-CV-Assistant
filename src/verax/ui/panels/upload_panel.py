@@ -1,26 +1,27 @@
 """Upload panel for selecting CV and template files."""
 
-import customtkinter as ctk
 from pathlib import Path
-from typing import Optional
 from tkinter import filedialog, messagebox
+from typing import Optional
+
+import customtkinter as ctk
 
 from verax.core.session import Session
 from verax.template.docx_extractor import DoxcTemplateExtractor
-from verax.template.pdf_extractor import PdfTemplateExtractor
 from verax.template.fallback import get_fallback_template
-from verax.utils import get_logger
+from verax.template.pdf_extractor import PdfTemplateExtractor
 from verax.ui.styles import (
-    COLORS,
-    PADDING_STANDARD,
-    PADDING_LARGE,
-    FONT_HEADING,
-    FONT_STANDARD,
     BUTTON_HEIGHT,
     BUTTON_WIDTH_STANDARD,
+    COLORS,
+    FONT_HEADING,
+    FONT_STANDARD,
+    PADDING_LARGE,
+    PADDING_STANDARD,
     SUPPORTED_CV_FORMATS,
     SUPPORTED_TEMPLATE_FORMATS,
 )
+from verax.utils import get_logger
 
 logger = get_logger(__name__)
 
@@ -170,7 +171,11 @@ class UploadPanel(ctk.CTkFrame):
             # Extract template schema
             if self.template_path:
                 template_schema = self._extract_template(self.template_path)
-                logger.info(f"Extracted template from {self.template_path.name}: {len(template_schema.sections)} sections")
+                num_sections = len(template_schema.sections)
+                logger.info(
+                    f"Extracted template from {self.template_path.name}: "
+                    f"{num_sections} sections"
+                )
             else:
                 # Use fallback template
                 fallback_path = get_fallback_template()

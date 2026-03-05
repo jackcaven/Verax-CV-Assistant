@@ -4,9 +4,8 @@ import shutil
 from pathlib import Path
 
 from docx import Document
-from docx.shared import Pt, RGBColor
 
-from verax.models.structured_cv import StructuredCV, CVSection, CVEntry
+from verax.models.structured_cv import CVEntry, CVSection, StructuredCV
 from verax.models.template_schema import TemplateSchema
 from verax.template.fallback import get_fallback_template
 from verax.utils import get_logger
@@ -151,7 +150,6 @@ class DocxBuilder:
 
         if contact_parts:
             # Add name as first paragraph
-            p = doc.paragraphs[0]._element if doc.paragraphs else doc.element.body
             name_para = doc.add_paragraph(contact_info.name or "")
             name_para.style = template_schema.contact_block_style or "Normal"
 
@@ -248,7 +246,7 @@ class DocxBuilder:
                     if line.startswith("-"):
                         line = line[1:].strip()
 
-                    bullet_para = doc.add_paragraph(line, style="List Bullet")
+                    doc.add_paragraph(line, style="List Bullet")
 
     @staticmethod
     def _add_placeholder_section(doc: Document, template_section) -> None:

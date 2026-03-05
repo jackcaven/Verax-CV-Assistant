@@ -1,14 +1,17 @@
 """Session management for application state."""
 
 from pathlib import Path
-from typing import Optional, Dict, List, Tuple
+from typing import Dict, List, Optional, Tuple
 
-from verax.models.template_schema import TemplateSchema
-from verax.models.structured_cv import StructuredCV
 from verax.models.config import AppConfig
+from verax.models.structured_cv import StructuredCV
+from verax.models.template_schema import TemplateSchema
 from verax.utils import get_logger
 
 logger = get_logger(__name__)
+
+# Type alias for batch processing results
+BatchResults = Dict[str, Tuple[Path, Optional[StructuredCV], Optional[Exception]]]
 
 
 class Session:
@@ -96,7 +99,7 @@ class Session:
             self.batch_results[cv_path.name] = (cv_path, structured_cv, error)
         logger.debug(f"Batch results stored: {len(self.batch_results)} CVs")
 
-    def get_batch_results(self) -> Dict[str, Tuple[Path, Optional[StructuredCV], Optional[Exception]]]:
+    def get_batch_results(self) -> BatchResults:
         """Get batch processing results.
 
         Returns:

@@ -5,9 +5,9 @@ import subprocess
 from pathlib import Path
 from typing import Optional
 
+from verax.builder.docx_builder import DocxBuilder
 from verax.models.structured_cv import StructuredCV
 from verax.models.template_schema import TemplateSchema
-from verax.builder.docx_builder import DocxBuilder
 from verax.utils import get_logger
 
 logger = get_logger(__name__)
@@ -99,7 +99,7 @@ class PdfBuilder:
             if docx_path.exists():
                 try:
                     docx_path.unlink()
-                    logger.debug(f"Cleaned up intermediate DOCX")
+                    logger.debug("Cleaned up intermediate DOCX")
                 except Exception as e:
                     logger.warning(f"Failed to clean up {docx_path}: {e}")
 

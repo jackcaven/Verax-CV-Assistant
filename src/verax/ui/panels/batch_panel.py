@@ -1,24 +1,25 @@
 """Batch processing panel for managing multiple CVs and progress."""
 
-import customtkinter as ctk
-from pathlib import Path
-from typing import Dict, List
-from tkinter import filedialog, messagebox
 import threading
+from pathlib import Path
+from tkinter import filedialog, messagebox
+from typing import Dict, List
 
-from verax.core.session import Session
+import customtkinter as ctk
+
 from verax.core.batch_processor import BatchProcessor
-from verax.utils import get_logger
+from verax.core.session import Session
 from verax.ui.styles import (
-    COLORS,
-    PADDING_STANDARD,
-    PADDING_LARGE,
-    FONT_HEADING,
-    FONT_STANDARD,
     BUTTON_HEIGHT,
     BUTTON_WIDTH_STANDARD,
+    COLORS,
+    FONT_HEADING,
+    FONT_STANDARD,
+    PADDING_LARGE,
+    PADDING_STANDARD,
     SUPPORTED_CV_FORMATS,
 )
+from verax.utils import get_logger
 
 logger = get_logger(__name__)
 
@@ -121,7 +122,12 @@ class BatchPanel(ctk.CTkFrame):
             fg_color=COLORS["bg_primary"],
             text_color=COLORS["text_primary"],
         )
-        self.progress_text.pack(fill="both", expand=True, padx=PADDING_STANDARD, pady=PADDING_STANDARD)
+        self.progress_text.pack(
+            fill="both",
+            expand=True,
+            padx=PADDING_STANDARD,
+            pady=PADDING_STANDARD,
+        )
         self.progress_text.configure(state="disabled")
 
         # Action buttons
@@ -280,7 +286,11 @@ class BatchPanel(ctk.CTkFrame):
             self.is_processing = False
             logger.info("Batch processing cancellation requested")
             self.cancel_button.configure(state="disabled")
-            messagebox.showinfo("Info", "Processing cancellation requested. Waiting for current tasks to complete...")
+            msg = (
+                "Processing cancellation requested. "
+                "Waiting for current tasks to complete..."
+            )
+            messagebox.showinfo("Info", msg)
 
     def update_progress(self, event) -> None:
         """Update progress for a single CV.
