@@ -9,7 +9,7 @@ try:
 except ImportError:
     KEYRING_AVAILABLE = False
 
-from verax.utils import get_logger
+from verax.utils.logging_config import get_logger
 
 logger = get_logger(__name__)
 

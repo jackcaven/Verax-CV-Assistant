@@ -6,7 +6,7 @@ from pathlib import Path
 import platformdirs
 
 from verax.models.config import AppConfig
-from verax.utils import get_logger
+from verax.utils.logging_config import get_logger
 
 logger = get_logger(__name__)
 
